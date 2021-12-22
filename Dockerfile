@@ -1,4 +1,4 @@
-FROM debian:bookworm
+FROM debian:bookworm-slim
 RUN set -eux; \
 	apt-get update; \
 	apt-get install -y --no-install-recommends \
@@ -23,7 +23,6 @@ RUN set -ex; \
 		file \
 		g++ \
 		gcc \
-		imagemagick \
 		libbz2-dev \
 		libc6-dev \
 		libcurl4-openssl-dev \
@@ -36,15 +35,12 @@ RUN set -ex; \
 		libjpeg-dev \
 		libkrb5-dev \
 		liblzma-dev \
-		libmagickcore-dev \
-		libmagickwand-dev \
 		libmaxminddb-dev \
 		libncurses5-dev \
 		libncursesw5-dev \
 		libpng-dev \
 		libpq-dev \
 		libreadline-dev \
-		libsqlite3-dev \
 		libssl-dev \
 		libtool \
 		libwebp-dev \
@@ -56,7 +52,6 @@ RUN set -ex; \
 		unzip \
 		xz-utils \
 		zlib1g-dev \
-        libbluetooth-dev \
         tk-dev \
 		uuid-dev \
         coreutils \
@@ -70,6 +65,11 @@ RUN set -ex; \
 		) \
 	; \
 	rm -rf /var/lib/apt/lists/*;
+RUN apt-get clean -yq;
+RUN apt-get autoremove --purge -yq
+RUN apt-get remove python3.9 -yq
+RUN apt-get autoremove -yq
+RUN apt --fix-broken install -yq
 RUN echo $PATH ;
 ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin:$PATH ;
 ENV LANG C.UTF-8
