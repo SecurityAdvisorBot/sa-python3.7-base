@@ -70,8 +70,8 @@ RUN set -ex; \
 		) \
 	; \
 	rm -rf /var/lib/apt/lists/*;
-
-ENV PATH /usr/local/bin:$PATH ;
+RUN echo $PATH ;
+ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin:$PATH ;
 ENV LANG C.UTF-8
 ENV GPG_KEY  0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D ;
 ENV PYTHON_VERSION 3.7.12 ;
